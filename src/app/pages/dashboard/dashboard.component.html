@@ -1,0 +1,206 @@
+<div class="flex flex-col min-h-screen">
+    <header class="bg-white text-white-foreground py-4 px-6 flex items-center justify-between">
+      <a class="hidden items-center gap-2 md:flex" href="#" rel="ugc">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-6 h-6"
+        >
+          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+        </svg>
+        <span class="text-xl font-bold">Book Store</span>
+      </a>
+      <div class="relative flex-1 max-w-md mx-6">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+        <input
+          class="flex h-10 border border-input px-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full bg-primary-foreground/10 pl-10 pr-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground/50"
+          placeholder="Search for books..."
+          type="search"
+        />
+      </div>
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 relative">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-6 h-6"
+        >
+          <circle cx="8" cy="21" r="1"></circle>
+          <circle cx="19" cy="21" r="1"></circle>
+          <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+        </svg>
+      </button>
+    </header>
+    <main class="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8">
+      <app-book-card
+        *ngFor="let book of books"
+        [url]="book.url"
+        [nombre]="book.nombre"
+        [autor]="book.autor"
+        [price]="book.price"
+        [stock]="book.stock"
+        [id]="book.id"
+        [isbn]="book.isbn"
+      >
+      </app-book-card>
+      <!-- <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="#">
+          <img
+            src="/placeholder.svg"
+            alt="The Great Gatsby"
+            width="300"
+            height="400"
+            class="w-full h-64 object-cover"
+            style="aspect-ratio: 300 / 400; object-fit: cover;"
+          />
+        </a>
+        <div class="p-4">
+          <h3 class="text-lg font-bold">The Great Gatsby</h3>
+          <p class="text-gray-500">F. Scott Fitzgerald</p>
+          <div class="flex justify-between items-center mt-4">
+            <span class="text-primary font-bold">$12.99</span>
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-900 text-primary-foreground hover:bg-gray-400 h-10 px-4 py-2 text-white hover:text-black">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="#">
+          <img
+            src="/placeholder.svg"
+            alt="To Kill a Mockingbird"
+            width="300"
+            height="400"
+            class="w-full h-64 object-cover"
+            style="aspect-ratio: 300 / 400; object-fit: cover;"
+          />
+        </a>
+        <div class="p-4">
+          <h3 class="text-lg font-bold">To Kill a Mockingbird</h3>
+          <p class="text-gray-500">Harper Lee</p>
+          <div class="flex justify-between items-center mt-4">
+            <span class="text-primary font-bold">$9.99</span>
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-900 text-primary-foreground hover:bg-gray-400 h-10 px-4 py-2 text-white hover:text-black">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="#">
+          <img
+            src="/placeholder.svg"
+            alt="1984"
+            width="300"
+            height="400"
+            class="w-full h-64 object-cover"
+            style="aspect-ratio: 300 / 400; object-fit: cover;"
+          />
+        </a>
+        <div class="p-4">
+          <h3 class="text-lg font-bold">1984</h3>
+          <p class="text-gray-500">George Orwell</p>
+          <div class="flex justify-between items-center mt-4">
+            <span class="text-primary font-bold">$8.99</span>
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-900 text-primary-foreground hover:bg-gray-400 h-10 px-4 py-2 text-white hover:text-black">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="#">
+          <img
+            src="/placeholder.svg"
+            alt="Pride and Prejudice"
+            width="300"
+            height="400"
+            class="w-full h-64 object-cover"
+            style="aspect-ratio: 300 / 400; object-fit: cover;"
+          />
+        </a>
+        <div class="p-4">
+          <h3 class="text-lg font-bold">Pride and Prejudice</h3>
+          <p class="text-gray-500">Jane Austen</p>
+          <div class="flex justify-between items-center mt-4">
+            <span class="text-primary font-bold">$7.99</span>
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-900 text-primary-foreground hover:bg-gray-400 h-10 px-4 py-2 text-white hover:text-black">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="#">
+          <img
+            src="/placeholder.svg"
+            alt="The Catcher in the Rye"
+            width="300"
+            height="400"
+            class="w-full h-64 object-cover"
+            style="aspect-ratio: 300 / 400; object-fit: cover;"
+          />
+        </a>
+        <div class="p-4">
+          <h3 class="text-lg font-bold">The Catcher in the Rye</h3>
+          <p class="text-gray-500">J.D. Salinger</p>
+          <div class="flex justify-between items-center mt-4">
+            <span class="text-primary font-bold">$11.99</span>
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-900 text-primary-foreground hover:bg-gray-400 h-10 px-4 py-2 text-white hover:text-black">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="#">
+          <img
+            src="/placeholder.svg"
+            alt="The Hobbit"
+            width="300"
+            height="400"
+            class="w-full h-64 object-cover"
+            style="aspect-ratio: 300 / 400; object-fit: cover;"
+          />
+        </a>
+        <div class="p-4">
+          <h3 class="text-lg font-bold">The Hobbit</h3>
+          <p class="text-gray-500">J.R.R. Tolkien</p>
+          <div class="flex justify-between items-center mt-4">
+            <span class="text-primary font-bold">$14.99</span>
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-900 text-primary-foreground hover:bg-gray-400 h-10 px-4 py-2 text-white hover:text-black">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div> -->
+    </main>
+  </div>

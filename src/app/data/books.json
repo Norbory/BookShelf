@@ -1,0 +1,74 @@
+[
+    {
+      "id": 1,
+      "isbn": "978-3-16-148410-0",
+      "nombre": "Don Quijote de la Mancha",
+      "autor": "Miguel de Cervantes",
+      "stock": 5,
+      "price": 19.99,
+      "url": "https://example.com/don-quijote"
+    },
+    {
+      "id": 2,
+      "isbn": "978-0-14-143951-8",
+      "nombre": "Pride and Prejudice",
+      "autor": "Jane Austen",
+      "stock": 7,
+      "price": 14.99,
+      "url": "https://example.com/pride-prejudice"
+    },
+    {
+      "id": 3,
+      "isbn": "978-0-451-52794-6",
+      "nombre": "The Great Gatsby",
+      "autor": "F. Scott Fitzgerald",
+      "stock": 8,
+      "price": 9.99,
+      "url": "https://example.com/the-great-gatsby"
+    },
+    {
+      "id": 4,
+      "isbn": "978-0-679-73276-8",
+      "nombre": "To Kill a Mockingbird",
+      "autor": "Harper Lee",
+      "stock": 4,
+      "price": 24.99,
+      "url": "https://example.com/to-kill-a-mockingbird"
+    },
+    {
+      "id": 5,
+      "isbn": "978-0-14-017739-8",
+      "nombre": "Of Mice and Men",
+      "autor": "John Steinbeck",
+      "stock": 10,
+      "price": 8.99,
+      "url": "https://example.com/of-mice-and-men"
+    },
+    {
+      "id": 6,
+      "isbn": "978-0-670-03243-0",
+      "nombre": "The Catcher in the Rye",
+      "autor": "J.D. Salinger",
+      "stock": 3,
+      "price": 15.99,
+      "url": "https://example.com/the-catcher-in-the-rye"
+    },
+    {
+      "id": 7,
+      "isbn": "978-0-395-08254-4",
+      "nombre": "The Hobbit",
+      "autor": "J.R.R. Tolkien",
+      "stock": 6,
+      "price": 12.99,
+      "url": "https://example.com/the-hobbit"
+    },
+    {
+      "id": 8,
+      "isbn": "978-0-7432-7356-0",
+      "nombre": "1984",
+      "autor": "George Orwell",
+      "stock": 9,
+      "price": 10.99,
+      "url": "https://example.com/1984"
+    }
+  ]
