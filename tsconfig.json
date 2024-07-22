@@ -51,6 +51,9 @@
       ],
       "@spartan-ng/ui-button-helm": [
         ".\\components/ui-button-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-sheet-helm": [
+        ".\\ui-sheet-helm/src/index.ts"
       ]
     }
   },

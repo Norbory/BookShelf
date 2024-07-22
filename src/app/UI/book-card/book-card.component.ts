@@ -5,7 +5,11 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-book-card',
   standalone: true,
-  imports: [NgIf, RouterModule],
+  imports: [
+    NgIf, 
+    RouterModule,
+    
+  ],
   templateUrl: './book-card.component.html',
   styleUrl: './book-card.component.css'
 })
