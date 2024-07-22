@@ -1,0 +1,6 @@
+.fondito {
+    background-color: #e5e5f7;
+    background-image:  linear-gradient(#d7d9ff 1.5px, transparent 1.5px), linear-gradient(to right, #d7d9ff 1.5px, #e5e5f7 1.5px);
+    background-size: 30px 30px;
+}
+

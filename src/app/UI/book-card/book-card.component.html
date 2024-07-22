@@ -8,26 +8,31 @@
         alt={{nombre}}
         width="300"
         height="400"
-        class="w-full h-64 object-cover"
+        class="w-full h-64 object-cover hover:scale-110 transition-all duration-200 ease-in-out"
         style="aspect-ratio: 300 / 400; object-fit: cover;"
         />
     </a>
     <div class="p-4">
         <h3 class="text-lg font-bold">{{nombre}}</h3>
         <p class="text-gray-500">{{autor}}</p>
-        <div class="flex justify-between items-center mt-4">
-        <div>   
-            <p class="text-primary font-bold">${{price}}</p>
-            <p class="text-primary font-bold flex flex-row gap-2">
-                <svg class="w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 19V6.2C4 5.0799 4 4.51984 4.21799 4.09202C4.40973 3.71569 4.71569 3.40973 5.09202 3.21799C5.51984 3 6.0799 3 7.2 3H16.8C17.9201 3 18.4802 3 18.908 3.21799C19.2843 3.40973 19.5903 3.71569 19.782 4.09202C20 4.51984 20 5.0799 20 6.2V17H6C4.89543 17 4 17.8954 4 19ZM4 19C4 20.1046 4.89543 21 6 21H20M9 7H15M9 11H15M19 17V21" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                {{stock}}
-            </p>
-        </div>
-        <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-900 text-primary-foreground hover:bg-gray-400 h-10 px-4 py-2 text-white hover:text-black">
-            Add to Cart
-        </button>
+        <div class="flex justify-between items-center mt-4 xl:flex-row flex-col">
+            <div class="xl:block w-full flex justify-between pb-2">   
+                <p class="text-primary font-bold">${{price}}</p>
+                <p class="text-primary font-bold flex flex-row gap-2">
+                    <svg class="w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 19V6.2C4 5.0799 4 4.51984 4.21799 4.09202C4.40973 3.71569 4.71569 3.40973 5.09202 3.21799C5.51984 3 6.0799 3 7.2 3H16.8C17.9201 3 18.4802 3 18.908 3.21799C19.2843 3.40973 19.5903 3.71569 19.782 4.09202C20 4.51984 20 5.0799 20 6.2V17H6C4.89543 17 4 17.8954 4 19ZM4 19C4 20.1046 4.89543 21 6 21H20M9 7H15M9 11H15M19 17V21" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    {{stock}}
+                </p>
+            </div>
+            <div class="flex gap-2 w-full justify-end">
+                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-900  hover:bg-green-700 h-10 px-4 py-2 text-white">
+                    Add to Cart
+                </button>
+                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 hover:underline text-black">
+                    + Details
+                </button>
+            </div>
         </div>
     </div>
 </div>

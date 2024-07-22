@@ -1,4 +1,51 @@
-<div>
-  <h1>Book</h1>
-  <p>book works!</p>
+<div class="bg-white overflow-hidden p-12 fondito">
+  <h1
+    class="text-6xl font-bold text-primary"
+  >
+    Book Details
+  </h1>
+  <section class="flex md:py-10 py-6 md:gap-8 gap-4 md:items-end md:flex-row flex-col">
+    <img 
+      src={{url}}
+      alt={{nombre}}
+      class="w-96 object-cover drop-shadow-lg"
+    >
+    <div class="flex flex-col gap-4">
+      <h2 class="text-4xl font-bold text-primary">{{nombre}}</h2>
+      <div>
+        <h3 class="text-sm font-medium text-gray-500">Written by</h3>
+        <p class="text-2xl text-gray-800 font-bold">{{autor}}</p>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-gray-500">ISBN:</h3>
+        <p class="text-2xl text-gray-800 font-bold">{{isbn}}</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 items-end">
+        <p class="text-2xl text-gray-800 font-bold">{{stock}}</p>
+        <h3 class="text-sm font-medium text-gray-500">in stock</h3>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-gray-500">Book's price</h3>
+        <p class="text-2xl text-gray-800 font-bold">${{price}}</p>
+      </div>
+
+      <div class="flex gap-2">
+        <button 
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-900  hover:bg-green-700 h-10 px-4 py-2 text-white"
+        >
+          Add to Cart
+        </button>
+        <button
+          [routerLink]="['/']"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:underline h-10 px-4 py-2"
+        >
+          Return
+        </button>
+      </div>
+
+    </div>
+  </section>
 </div>

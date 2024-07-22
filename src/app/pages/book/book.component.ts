@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-book',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './book.component.html',
   styleUrl: './book.component.css'
 })
