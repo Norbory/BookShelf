@@ -92,13 +92,13 @@
     </header>
     <main class="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8">
       <app-book-card
-        *ngFor="let book of books"
+        *ngFor="let book of booksDB"
         [url]="book.url"
-        [nombre]="book.nombre"
-        [autor]="book.autor"
-        [price]="book.price"
+        [nombre]="book.name"
+        [autor]="book.author"
+        [price]="book.current_price"
         [stock]="book.stock"
-        [id]="book.id"
+        [id]="book.book_id"
         [isbn]="book.isbn"
       >
       </app-book-card>

@@ -70,5 +70,23 @@
       "stock": 9,
       "price": 10.99,
       "url": "https://www.magicmurals.com/media/amasty/webp/catalog/product/cache/155d73b570b90ded8a140526fcb8f2da/a/d/adg-0000001048_1_jpg.webp"
+    },
+    {
+      "id": 9,
+      "isbn": "978-1-5011-4687-4",
+      "nombre": "Little Fires Everywhere",
+      "autor": "Celeste Ng",
+      "stock": 5,
+      "price": 12.99,
+      "url": "https://images-na.ssl-images-amazon.com/images/I/61E5QliIaAL.jpg"
+    },
+    {
+      "id": 10,
+      "isbn": "978-0-06-245773-8",
+      "nombre": "The Night Circus",
+      "autor": "Erin Morgenstern",
+      "stock": 7,
+      "price": 10.99,
+      "url": "https://m.media-amazon.com/images/I/81wHpiNObnL._AC_UF894,1000_QL80_.jpg"
     }
   ]

@@ -1,9 +1,9 @@
 export interface Book {
-    id: number;
+    book_id: number;
     isbn: string;
-    nombre: string;
-    autor: string;
+    name: string;
+    author: string;
     stock: number;
-    price: number;
+    current_price: number;
     url: string;
 }

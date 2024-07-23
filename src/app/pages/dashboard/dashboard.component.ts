@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookCardComponent } from "../../UI/book-card/book-card.component";
 import { RouterModule } from '@angular/router';
-import * as data from '../../data/books.json' 
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Book } from '../..//types/book';
 import { BrnSheetContentDirective, BrnSheetTriggerDirective } from '@spartan-ng/ui-sheet-brain';
 import {
@@ -13,7 +12,7 @@ import {
   HlmSheetHeaderComponent,
   HlmSheetTitleDirective,
 } from '@spartan-ng/ui-sheet-helm';
-// import { BookServices } from '../../services/book-services.service';
+import { BookServices } from '../../services/book-services.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,6 +20,7 @@ import {
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
   imports: [
+    NgClass,
     NgFor, 
     NgIf, 
     BookCardComponent, 
@@ -36,10 +36,26 @@ import {
   ],
 })
 export class DashboardComponent implements OnInit{
-  constructor() { }
+  constructor(private _BookServices: BookServices) { }
 
   ngOnInit() {
+    this.getBooks();
   }
 
-  books: Book[] = (data as any).default;
+  booksDB: Book[] = [];
+
+  // Get all books
+  getBooks() {
+    this._BookServices.getBooks().subscribe(
+      (data: Book[]) => {
+        this.booksDB = data;
+      },
+      (error) => {
+        console.log(error);
+      }    
+    );
+  }
+
+
+
 }
