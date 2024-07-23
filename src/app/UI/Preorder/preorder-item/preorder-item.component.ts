@@ -12,4 +12,6 @@ export class PreorderItemComponent {
   @Input() book: Book | undefined;
   @Input() quantity: number = 1;
   @Input() remove: Function = () => {};
+  @Input() addBooks: Function = () => {};
+  @Input() decreaseBooks: Function = () => {};
 }

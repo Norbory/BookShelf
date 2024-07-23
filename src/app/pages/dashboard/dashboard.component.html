@@ -15,29 +15,79 @@
         >
           <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
         </svg>
-        <span class="text-xl font-bold">Book Store</span>
+        <span class="text-xl font-bold">BookShelf</span>
       </a>
-      <div class="relative flex-1 max-w-md mx-6">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-        >
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.3-4.3"></path>
-        </svg>
-        <input
-          class="flex h-10 border border-input px-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full bg-primary-foreground/10 pl-10 pr-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground/50"
-          placeholder="Search for books..."
-          type="search"
-        />
+      <div class="flex items-center">
+        <div class="relative flex flex-row items-center">
+          <a
+            (click)="displayFilter()"
+            class="cursor-pointer hover:shadow-lg rounded-lg p-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+            </svg>  
+          </a>
+          <div
+            *ngIf="this.desplegar"
+            class="absolute bg-[#FDFBF6] rounded-lg shadow-lg p-2 w-40 top-10 border border-slate-400"
+          >
+            <div
+              class="flex flex-col items-center justify-center"
+            >
+              <a
+                class="cursor-pointer hover:bg-red-500 hover:text-white p-4 w-full"
+                (click)="changeOption('name')"
+              >
+                <p
+                  class=" text-md font-semibold"
+                >
+                  Nombre
+                </p>
+              </a>
+              <a
+                class="cursor-pointer hover:bg-red-500 hover:text-white p-4 w-full"
+                (click)="changeOption('ISBN')"
+              >
+                <p
+                  class=" text-md font-semibold"
+                >
+                  ISBN
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="relative flex-1 max-w-md mx-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+          <input
+            class="flex h-10 border border-input px-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full bg-primary-foreground/10 pl-10 pr-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground/50"
+            placeholder="Search by ISBN..."
+            type="text"
+            [(ngModel)]="filterISBN"
+            *ngIf="this.opcionFilter === 'ISBN'"
+          />
+          <input
+            class="flex h-10 border border-input px-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full bg-primary-foreground/10 pl-10 pr-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground/50"
+            placeholder="Search by name..."
+            type="text"
+            [(ngModel)]="filterName"
+            *ngIf="this.opcionFilter === 'name'"
+          />
+        </div>
       </div>
       <hlm-sheet side="right">
         <button id="edit-profile" variant="outline" brnSheetTrigger hlmBtn>
@@ -98,18 +148,130 @@
                 [book]="pre.Book"
                 [quantity]="pre.quantity"
                 [remove]="removePreorderWrapper(pre.Book.book_id)"
+                [addBooks]="increaseQuantityWrapper(pre.Book.book_id)"
+                [decreaseBooks]="decreaseQuantityWrapper(pre.Book.book_id)"
               >
               </app-preorder-item>
             </div>
+            <hlm-dialog>
+              <button 
+                id="edit-profile" 
+                brnDialogTrigger 
+                class="py-1 hover:underline transition-colors duration-200 ease-in-out"
+              >
+                Details for payment
+              </button>
+            <hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
+              <hlm-dialog-header>
+                <h3 hlmDialogTitle>
+                  Confirm your purchase
+                </h3>
+                <p hlmDialogDescription>
+                  Verify your information before proceeding
+                </p>
+              </hlm-dialog-header>
+              <form
+                [formGroup]="form"
+                (ngSubmit)="updateDetails()"
+                class="flex flex-col gap-4"
+              >
+                <!-- Campo de doc_type -->
+                <div class="items-center grid grid-cols-4 gap-4">
+                  <label 
+                    hlmLabel 
+                    for="documentType" 
+                    class="text-right"
+                  >
+                    Document
+                  </label>
+                  <select 
+                    hlmSelect 
+                    id="documentType" 
+                    class="col-span-3 px-1 rounded-sm"
+                    formControlName="doc_type"
+                    required
+                    [class.noValido]="form.controls['doc_type'].invalid && (form.controls['doc_type'].touched || form.controls['doc_type'].dirty)"
+                    [class.valido]="form.controls['doc_type'].valid && (form.controls['doc_type'].touched || form.controls['doc_type'].dirty)"
+                  >
+                    <option value="" disabled selected>Select a document</option>
+                    <option value="Factura">Factura</option>
+                    <option value="Boleta">Boleta</option>
+                  </select>
+                </div>
+                <!-- Campo de doc_number -->
+                <div class="items-center grid grid-cols-4 gap-4">
+                  <label 
+                    hlmLabel 
+                    for="documentNumber" 
+                    class="text-right"
+                  >
+                    Document Number
+                  </label>
+                  <input 
+                    hlmInput 
+                    id="documentNumber" 
+                    class="col-span-3 px-2 rounded-sm"
+                    formControlName="doc_number"
+                    type="text"
+                    placeholder="124521124521"
+                    required
+                    [class.noValido]="form.controls['doc_number'].invalid && (form.controls['doc_number'].touched || form.controls['doc_number'].dirty)"
+                    [class.valido]="form.controls['doc_number'].valid && (form.controls['doc_number'].touched || form.controls['doc_number'].dirty)"
+                  />
+                  <div
+                    class="col-span-4"
+                    *ngIf="form.controls['doc_number'].invalid && (form.controls['doc_number'].touched || form.controls['doc_number'].dirty)"
+                  >
+                    <p
+                      class="text-[#760000] text-xs font-semibold px-2"
+                      *ngIf="form.controls['doc_number'].errors?.['required']"
+                    >
+                      Este campo es obligatorio
+                    </p>
+                    <p
+                      class="text-[#760000] text-xs font-semibold px-2"
+                      *ngIf="form.controls['doc_number'].errors?.['minlength'] || form.controls['doc_type'].value === 'Boleta'"
+                    >
+                      If you choose Boleta, the field must have 12 characters
+                    </p>
+                    <p
+                      class="text-[#760000] text-xs font-semibold px-2"
+                      *ngIf="form.controls['doc_number'].errors?.['maxlength'] || form.controls['doc_type'].value === 'Factura'"
+                    >
+                      If you choose Factura, the field must have 20 characters
+                    </p>
+                    <p
+                      class="text-[#760000] text-xs font-semibold px-2"
+                      *ngIf="form.controls['doc_number'].errors?.['pattern']"
+                    >
+                      Solo se permiten números
+                    </p>
+                  </div>
+                </div>
+                <hlm-dialog-footer>
+                  <button
+                    class="px-4 py-1 rounded-md shadow-lg bg-green-600 hover:bg-green-800 text-white transition-colors duration-200 ease-in-out"
+                    type="submit"
+                    [disabled]="this.form.invalid"
+                    [class.disabled]="this.form.invalid"
+                  >
+                    Save changes
+                  </button>
+                </hlm-dialog-footer>
+              </form>
+            </hlm-dialog-content>
+          </hlm-dialog>
           <div
-            class="flex w-full items-center justify-between"
+            class="flex w-full items-center justify-between py-2"
           >
             <h3 class="text-lg">
               Total: <strong>${{total}}</strong>
             </h3>
             <button 
-              class="px-4 py-1 rounded-md shadow-lg bg-green-500 hover:bg-green-700 text-white transition-colors duration-200 ease-in-out"
-              type="submit"
+              class="px-4 py-1 rounded-md shadow-lg bg-green-600 hover:bg-green-800 text-white transition-colors duration-200 ease-in-out"
+              (click)="buybooks()"
+              [disabled]="this.doc_number === '' || this.doc_type === 0 || this.preorder.length === 0"
+              [class.disabled]="this.doc_number === '' || this.doc_type === 0 || this.preorder.length === 0"
             >
               Buy it
             </button>
@@ -117,9 +279,12 @@
         </hlm-sheet-content>
       </hlm-sheet>
     </header>
-    <main class="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8">
+    <main 
+      class="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8"
+      *ngIf="booksDB.length > 0"
+    >
       <app-book-card
-        *ngFor="let book of booksDB"
+        *ngFor="let book of booksDB | bookName:filterName | book:filterISBN"
         [url]="book.url"
         [nombre]="book.name"
         [autor]="book.author"
@@ -131,69 +296,12 @@
       >
       </app-book-card>
     </main>
-  </div>
-
-
-
-                <!-- ? <div class="flex gap-2">
-                  <img 
-                    src={{booksDB[0].url}}
-                    alt={{preorder[0].Book.name}}
-                    class="w-16 h-16 drop-shadow-md self-center"
-                  >
-                  <div class="flex flex-col w-full">
-                    
-                    <button 
-                      class="rounded-md transition-colors duration-200 ease-in-out self-end"
-                      
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="w-4 h-4"
-                      >
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                      </svg>
-                    </button>
-                    <div class="flex flex-col justify-between gap-1">
-                      <div>
-                        <h3 class="font-semibold text-base">
-                          {{booksDB[0].name}}
-                        </h3>
-                        <p class="text-gray-500 text-xs">
-                          {{booksDB[0].author}}
-                        </p>
-                      </div>
-                      
-                        <p class="text-gray-700 text-base">
-                          ${{booksDB[0].current_price}}
-                        </p>
-                        
-                        
-                        <div class="flex gap-2 text-md items-center justify-end">
-                          <button
-                              class="p-1 font-bold transition-colors duration-200 ease-in-out"
-                          >
-                            +
-                          </button>
-                          <p class="p-1">
-                            1
-                          </p>
-                          <button
-                            class="p-1 font-bold transition-colors duration-200 ease-in-out"
-                          >
-                            -
-                          </button>
-                         </div>
-                    </div>
-                  </div>
-               </div>
-                : null -->
+    <main
+      class="flex-1 flex items-center justify-center"
+      *ngIf="booksDB.length === 0"
+    >
+      <h1 class="text-3xl font-bold text-center">
+        No books found or available
+      </h1>
+    </main>
+  </div> 

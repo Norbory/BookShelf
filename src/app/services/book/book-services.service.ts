@@ -22,7 +22,7 @@ export class BookServices {
   }
 
   // Update book
-  updateBook(id: string, stock: number): Observable<any> {
+  updateBook(id: number, stock: number): Observable<any> {
     return this.http.put(this.AppUrl + 'books/' + id, stock);
   }
 }

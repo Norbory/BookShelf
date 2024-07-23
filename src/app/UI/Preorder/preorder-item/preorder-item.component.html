@@ -1,4 +1,4 @@
-<div *ngIf="book" class="flex gap-2 pb-4">
+<div *ngIf="book" class="flex gap-2 p-4 border mb-2 rounded-xl shadow-sm hover:shadow-xl transition-all duration-200 ease-in-out">
     <img 
       src={{book.url}}
       alt={{book.name}}
@@ -44,6 +44,7 @@
           <div class="flex gap-2 text-md items-center justify-end">
             <button
                 class="p-1 font-bold transition-colors duration-200 ease-in-out"
+                (click)="addBooks()"
             >
               +
             </button>
@@ -52,6 +53,7 @@
             </p>
             <button
               class="p-1 font-bold transition-colors duration-200 ease-in-out"
+              (click)="decreaseBooks()"
             >
               -
             </button>

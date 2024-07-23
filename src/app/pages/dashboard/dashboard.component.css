@@ -7,3 +7,21 @@
 .cdk-overlay-pane {
     background-color: bisque;
 }
+
+.disabled{
+    background-color: gray;
+}
+
+.valido{
+    border-width: 2px;
+    border-color: green;
+}
+
+.validoTexto{
+    color: green;
+}
+
+.noValido{
+    border-width: 1px;
+    border-color: red;
+}
