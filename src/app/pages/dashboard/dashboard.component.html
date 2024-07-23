@@ -59,12 +59,31 @@
           </svg>
         </button>
         <hlm-sheet-content 
-          class="bg-white"
+          class="bg-white absolute top-0 right-0 transition-all duration-250 sm:w-96 w-full overflow-y-scroll"
           *brnSheetContent="let ctx"
         >
           <hlm-sheet-header
-            class="p-4 bg-white"
+            class="py-8"
           >
+            <div class="flex flex-row pb-6">
+              <hlm-avatar variant="large">
+                  <img 
+                    src="https://www.shareicon.net/data/512x512/2016/09/15/829472_man_512x512.png" 
+                    alt={{clientDB[0].first_name}}
+                    hlmAvatarImage
+                    class="w-12 h-12 drop-shadow-md self-center"
+                  />    
+              </hlm-avatar>
+              <div class="sm:flex flex-col justify-center hidden">
+                <h3 hlmSheetTitle>
+                  {{clientDB[0].first_name}} {{clientDB[0].last_name}}
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  {{clientDB[0].email}}
+                </p>
+              </div>
+            </div>
+            
             <h3 hlmSheetTitle>
               Check your deals
             </h3>
@@ -72,21 +91,29 @@
               Make sure you're getting the best deals on the books you love
             </p>
           </hlm-sheet-header>
-          <div class="p-4 grid gap-4 bg-white">
-            <div class="items-center grid grid-cols-4 gap-4">
-              <label hlmLabel for="name" class="text-right">Name</label>
-              <input hlmInput id="name" value="Pedro Duarte" class="col-span-3" />
+            <!-- book, url, price, quantity -->
+            <div class="scroll-smooth">
+              <app-preorder-item
+                *ngFor="let pre of preorder"
+                [book]="pre.Book"
+                [quantity]="pre.quantity"
+                [remove]="removePreorderWrapper(pre.Book.book_id)"
+              >
+              </app-preorder-item>
             </div>
-            <div class="items-center grid grid-cols-4 gap-4">
-              <label hlmLabel for="username" class="text-right">Username</label>
-              <input hlmInput id="username" value="@peduarte" class="col-span-3" />
-            </div>
-          </div>
-          <hlm-sheet-footer
-            class="p-4 bg-white"
+          <div
+            class="flex w-full items-center justify-between"
           >
-            <button hlmBtn type="submit">Save Changes</button>
-          </hlm-sheet-footer>
+            <h3 class="text-lg">
+              Total: <strong>${{total}}</strong>
+            </h3>
+            <button 
+              class="px-4 py-1 rounded-md shadow-lg bg-green-500 hover:bg-green-700 text-white transition-colors duration-200 ease-in-out"
+              type="submit"
+            >
+              Buy it
+            </button>
+          </div>
         </hlm-sheet-content>
       </hlm-sheet>
     </header>
@@ -100,7 +127,73 @@
         [stock]="book.stock"
         [id]="book.book_id"
         [isbn]="book.isbn"
+        [addPreorder]="addPreorderWrapper(book.book_id,1)"
       >
       </app-book-card>
     </main>
   </div>
+
+
+
+                <!-- ? <div class="flex gap-2">
+                  <img 
+                    src={{booksDB[0].url}}
+                    alt={{preorder[0].Book.name}}
+                    class="w-16 h-16 drop-shadow-md self-center"
+                  >
+                  <div class="flex flex-col w-full">
+                    
+                    <button 
+                      class="rounded-md transition-colors duration-200 ease-in-out self-end"
+                      
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="w-4 h-4"
+                      >
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </button>
+                    <div class="flex flex-col justify-between gap-1">
+                      <div>
+                        <h3 class="font-semibold text-base">
+                          {{booksDB[0].name}}
+                        </h3>
+                        <p class="text-gray-500 text-xs">
+                          {{booksDB[0].author}}
+                        </p>
+                      </div>
+                      
+                        <p class="text-gray-700 text-base">
+                          ${{booksDB[0].current_price}}
+                        </p>
+                        
+                        
+                        <div class="flex gap-2 text-md items-center justify-end">
+                          <button
+                              class="p-1 font-bold transition-colors duration-200 ease-in-out"
+                          >
+                            +
+                          </button>
+                          <p class="p-1">
+                            1
+                          </p>
+                          <button
+                            class="p-1 font-bold transition-colors duration-200 ease-in-out"
+                          >
+                            -
+                          </button>
+                         </div>
+                    </div>
+                  </div>
+               </div>
+                : null -->

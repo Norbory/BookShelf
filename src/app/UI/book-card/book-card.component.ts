@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
   imports: [
     NgIf, 
     RouterModule,
-    
   ],
   templateUrl: './book-card.component.html',
   styleUrl: './book-card.component.css'
@@ -21,4 +20,5 @@ export class BookCardComponent {
   @Input() stock: number | undefined = 0;
   @Input() price: number | undefined = 0;
   @Input() url: string | undefined;
+  @Input() addPreorder: Function = () => {};
 }

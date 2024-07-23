@@ -1,0 +1,61 @@
+<div *ngIf="book" class="flex gap-2 pb-4">
+    <img 
+      src={{book.url}}
+      alt={{book.name}}
+      class="w-16 h-16 drop-shadow-md self-center"
+    >
+    <div class="flex flex-col w-full">
+      
+      <button 
+        class="rounded-md transition-colors duration-200 ease-in-out self-end"
+        (click)="remove()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-4 h-4"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="flex flex-col justify-between gap-1">
+        <div>
+          <h3 class="font-semibold text-base">
+            {{book.name}}
+          </h3>
+          <p class="text-gray-500 text-xs">
+            {{book.author}}
+          </p>
+        </div>
+        
+          <p class="text-gray-700 text-base">
+            ${{book.current_price}}
+          </p>
+          
+          
+          <div class="flex gap-2 text-md items-center justify-end">
+            <button
+                class="p-1 font-bold transition-colors duration-200 ease-in-out"
+            >
+              +
+            </button>
+            <p class="p-1">
+              {{quantity}}
+            </p>
+            <button
+              class="p-1 font-bold transition-colors duration-200 ease-in-out"
+            >
+              -
+            </button>
+           </div>
+      </div>
+    </div>
+ </div>
