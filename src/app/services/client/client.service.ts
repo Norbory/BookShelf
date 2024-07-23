@@ -21,4 +21,14 @@ export class ClientService {
     return this.http.get(this.AppUrl + 'clients/' + id);
   }
 
+  // Get client by doc_number
+  getClientByDocNumber(doc_number: string): Observable<any> {
+    return this.http.get(this.AppUrl + 'clients/doc/' + doc_number);
+  }
+
+  // Create client
+  createClient(client: any): Observable<any> {
+    return this.http.post(this.AppUrl + 'clients', client);
+  }
+
 }

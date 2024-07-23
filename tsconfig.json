@@ -54,6 +54,9 @@
       ],
       "@spartan-ng/ui-sheet-helm": [
         ".\\ui-sheet-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-sonner-helm": [
+        ".\\ui-sonner-helm/src/index.ts"
       ]
     }
   },

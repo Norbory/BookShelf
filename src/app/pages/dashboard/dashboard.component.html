@@ -114,26 +114,7 @@
         >
           <hlm-sheet-header
             class="py-8"
-          >
-            <div class="flex flex-row pb-6">
-              <hlm-avatar variant="large">
-                  <img 
-                    src="https://www.shareicon.net/data/512x512/2016/09/15/829472_man_512x512.png" 
-                    alt={{clientDB[0].first_name}}
-                    hlmAvatarImage
-                    class="w-12 h-12 drop-shadow-md self-center"
-                  />    
-              </hlm-avatar>
-              <div class="sm:flex flex-col justify-center hidden">
-                <h3 hlmSheetTitle>
-                  {{clientDB[0].first_name}} {{clientDB[0].last_name}}
-                </h3>
-                <p class="text-gray-600 text-sm">
-                  {{clientDB[0].email}}
-                </p>
-              </div>
-            </div>
-            
+          > 
             <h3 hlmSheetTitle>
               Check your deals
             </h3>
@@ -169,91 +150,398 @@
                 <p hlmDialogDescription>
                   Verify your information before proceeding
                 </p>
+                <!-- Choose between new or existing customer -->
+                <div class="flex items-start gap-4">
+                  <button
+                    class="px-4 py-1 rounded-md shadow-lg bg-green-600 hover:bg-green-800 text-white transition-colors duration-200 ease-in-out"
+                    (click)="this.choose = true"
+                    [class.disabled]="!this.choose"
+                  >
+                    New Customer
+                  </button>
+                  <button
+                    class="px-4 py-1 rounded-md shadow-lg bg-green-600 hover:bg-green-800 text-white transition-colors duration-200 ease-in-out"
+                    (click)="this.choose = false"
+                    [class.disabled]="this.choose"
+                  >
+                    Existing Customer
+                  </button>
+                </div>
               </hlm-dialog-header>
               <form
                 [formGroup]="form"
                 (ngSubmit)="updateDetails()"
                 class="flex flex-col gap-4"
               >
-                <!-- Campo de doc_type -->
-                <div class="items-center grid grid-cols-4 gap-4">
-                  <label 
-                    hlmLabel 
-                    for="documentType" 
-                    class="text-right"
-                  >
-                    Document
-                  </label>
-                  <select 
-                    hlmSelect 
-                    id="documentType" 
-                    class="col-span-3 px-1 rounded-sm"
-                    formControlName="doc_type"
-                    required
-                    [class.noValido]="form.controls['doc_type'].invalid && (form.controls['doc_type'].touched || form.controls['doc_type'].dirty)"
-                    [class.valido]="form.controls['doc_type'].valid && (form.controls['doc_type'].touched || form.controls['doc_type'].dirty)"
-                  >
-                    <option value="" disabled selected>Select a document</option>
-                    <option value="Factura">Factura</option>
-                    <option value="Boleta">Boleta</option>
-                  </select>
+                <div>
+                  <h3 class="text-lg font-semibold">
+                    Customer Information
+                  </h3>
+                  <div *ngIf="this.choose">
+                    <!-- Campo de c_doc_type -->
+                    <div class="items-center grid grid-cols-4 gap-4 text-sm py-2">
+                      <label 
+                        hlmLabel 
+                        for="documentType" 
+                        class="text-right"
+                      >
+                        Document
+                      </label>
+                      <select 
+                        hlmSelect 
+                        id="documentType" 
+                        class="col-span-3 px-1 rounded-sm"
+                        formControlName="c_doc_type"
+                        required
+                        [class.noValido]="form.controls['c_doc_type'].invalid && (form.controls['c_doc_type'].touched || form.controls['c_doc_type'].dirty)"
+                        [class.valido]="form.controls['c_doc_type'].valid && (form.controls['c_doc_type'].touched || form.controls['c_doc_type'].dirty)"
+                      >
+                        <option value="" disabled selected>Select a document</option>
+                        <option value="DNI">DNI</option>
+                        <option value="RUC">RUC</option>
+                        <option value="CE">CE</option>
+                      </select>
+                    </div>
+                    <!-- Campo de c_doc_number -->
+                    <div class="items-center grid grid-cols-4 gap-4 text-sm py-2">
+                      <label 
+                        hlmLabel 
+                        for="c_documentNumber" 
+                        class="text-right"
+                      >
+                        Document Number
+                      </label>
+                      <input 
+                        hlmInput 
+                        id="c_documentNumber" 
+                        class="col-span-3 px-2 rounded-sm"
+                        formControlName="c_doc_number"
+                        type="text"
+                        placeholder="124521124521"
+                        required
+                        [class.noValido]="form.controls['c_doc_number'].invalid && (form.controls['c_doc_number'].touched || form.controls['c_doc_number'].dirty)"
+                        [class.valido]="form.controls['c_doc_number'].valid && (form.controls['c_doc_number'].touched || form.controls['c_doc_number'].dirty)"
+                      />
+                      <div
+                        class="col-span-4"
+                        *ngIf="form.controls['c_doc_number'].invalid && (form.controls['c_doc_number'].touched || form.controls['c_doc_number'].dirty)"
+                      >
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_doc_number'].errors?.['required']"
+                        >
+                          Este campo es obligatorio
+                        </p>
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_doc_number'].errors?.['minlength'] || form.controls['c_doc_type'].value === 'Boleta'"
+                        >
+                          If you choose DNI, the field must have 8 characters and if you choose RUC, the field must have 11 characters
+                        </p>
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_doc_number'].errors?.['maxlength'] || form.controls['c_doc_type'].value === 'Factura'"
+                        >
+                          If you choose CE, the field must have 20 characters
+                        </p>
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_doc_number'].errors?.['pattern']"
+                        >
+                          Solo se permiten números
+                        </p>
+                      </div>
+                    </div>
+                    <!-- Campo de c_first_name -->
+                    <div class="items-center grid grid-cols-4 gap-4 text-sm py-2">
+                      <label 
+                        hlmLabel 
+                        for="c_firstName" 
+                        class="text-right"
+                      >
+                        First Name
+                      </label>
+                      <input 
+                        hlmInput 
+                        id="c_firstName" 
+                        class="col-span-3 px-2 rounded-sm"
+                        formControlName="c_first_name"
+                        type="text"
+                        placeholder="John"
+                        required
+                        [class.noValido]="form.controls['c_first_name'].invalid && (form.controls['c_first_name'].touched || form.controls['c_first_name'].dirty)"
+                        [class.valido]="form.controls['c_first_name'].valid && (form.controls['c_first_name'].touched || form.controls['c_first_name'].dirty)"
+                      />
+                      <div
+                        class="col-span-4"
+                        *ngIf="form.controls['c_first_name'].invalid && (form.controls['c_first_name'].touched || form.controls['c_first_name'].dirty)"
+                      >
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_first_name'].errors?.['required']"
+                        >
+                          Este campo es obligatorio
+                        </p>
+                      </div>
+                    </div>
+                    <!-- Campo de c_last_name -->
+                    <div class="items-center grid grid-cols-4 gap-4 text-sm py-2">
+                      <label 
+                        hlmLabel 
+                        for="c_lastName" 
+                        class="text-right"
+                      >
+                        Last Name
+                      </label>
+                      <input 
+                        hlmInput 
+                        id="c_lastName" 
+                        class="col-span-3 px-2 rounded-sm"
+                        formControlName="c_last_name"
+                        type="text"
+                        placeholder="Doe"
+                        required
+                        [class.noValido]="form.controls['c_last_name'].invalid && (form.controls['c_last_name'].touched || form.controls['c_last_name'].dirty)"
+                        [class.valido]="form.controls['c_last_name'].valid && (form.controls['c_last_name'].touched || form.controls['c_last_name'].dirty)"
+                      />
+                      <div
+                        class="col-span-4"
+                        *ngIf="form.controls['c_last_name'].invalid && (form.controls['c_last_name'].touched || form.controls['c_last_name'].dirty)"
+                      >
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_last_name'].errors?.['required']"
+                        >
+                          Este campo es obligatorio
+                        </p>
+                      </div>
+                    </div>
+                    <!-- Campo de c_phone -->
+                    <div class="items-center grid grid-cols-4 gap-4 text-sm py-2">
+                      <label 
+                        hlmLabel 
+                        for="c_phone" 
+                        class="text-right"
+                      >
+                        Phone
+                      </label>
+                      <input 
+                        hlmInput 
+                        id="c_phone" 
+                        class="col-span-3 px-2 rounded-sm"
+                        formControlName="c_phone"
+                        type="text"
+                        placeholder="987654321"
+                        required
+                        [class.noValido]="form.controls['c_phone'].invalid && (form.controls['c_phone'].touched || form.controls['c_phone'].dirty)"
+                        [class.valido]="form.controls['c_phone'].valid && (form.controls['c_phone'].touched || form.controls['c_phone'].dirty)"
+                      />
+                      <div
+                        class="col-span-4"
+                        *ngIf="form.controls['c_phone'].invalid && (form.controls['c_phone'].touched || form.controls['c_phone'].dirty)"
+                      >
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_phone'].errors?.['required']"
+                        >
+                          Este campo es obligatorio
+                        </p>
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_phone'].errors?.['minlength']"
+                        >
+                          El número de teléfono debe tener 9 dígitos
+                        </p>
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_phone'].errors?.['maxlength']"
+                        >
+                          El número de teléfono debe tener 9 dígitos
+                        </p>
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_phone'].errors?.['pattern']"
+                        >
+                          Solo se permiten números
+                        </p>
+                      </div>
+                    </div>
+                    <!-- Campo de c_email -->
+                    <div class="items-center grid grid-cols-4 gap-4 text-sm py-2">
+                      <label 
+                        hlmLabel 
+                        for="c_email" 
+                        class="text-right"
+                      >
+                        Email
+                      </label>
+                      <input 
+                        hlmInput 
+                        id="c_email" 
+                        class="col-span-3 px-2 rounded-sm"
+                        formControlName="c_email"
+                        type="email"
+                        placeholder="mail@host.com"
+                        required
+                        [class.noValido]="form.controls['c_email'].invalid && (form.controls['c_email'].touched || form.controls['c_email'].dirty)"
+                        [class.valido]="form.controls['c_email'].valid && (form.controls['c_email'].touched || form.controls['c_email'].dirty)"
+                      />
+                      <div
+                        class="col-span-4"
+                        *ngIf="form.controls['c_email'].invalid && (form.controls['c_email'].touched || form.controls['c_email'].dirty)"
+                      >
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_email'].errors?.['required']"
+                        >
+                          Este campo es obligatorio
+                        </p>
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_email'].errors?.['email']"
+                        >
+                          El correo no es válido
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="!this.choose">
+                    <!-- Campo de c_doc_number -->
+                    <div class="items-center grid grid-cols-4 gap-4 text-sm">
+                      <label 
+                        hlmLabel 
+                        for="c_documentNumber" 
+                        class="text-right"
+                      >
+                        Document Number
+                      </label>
+                      <input 
+                        hlmInput 
+                        id="c_documentNumber" 
+                        class="col-span-3 px-2 rounded-sm"
+                        formControlName="c_doc_number"
+                        type="text"
+                        placeholder="124521124521"
+                        required
+                        [class.noValido]="form.controls['c_doc_number'].invalid && (form.controls['c_doc_number'].touched || form.controls['c_doc_number'].dirty)"
+                        [class.valido]="form.controls['c_doc_number'].valid && (form.controls['c_doc_number'].touched || form.controls['c_doc_number'].dirty)"
+                      />
+                      <div
+                        class="col-span-4"
+                        *ngIf="form.controls['c_doc_number'].invalid && (form.controls['c_doc_number'].touched || form.controls['c_doc_number'].dirty)"
+                      >
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_doc_number'].errors?.['required']"
+                        >
+                          Este campo es obligatorio
+                        </p>
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_doc_number'].errors?.['minlength'] || form.controls['c_doc_type'].value === 'Boleta'"
+                        >
+                          If you choose DNI, the field must have 8 characters and if you choose RUC, the field must have 11 characters
+                        </p>
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_doc_number'].errors?.['maxlength'] || form.controls['c_doc_type'].value === 'Factura'"
+                        >
+                          If you choose CE, the field must have 20 characters
+                        </p>
+                        <p
+                          class="text-[#760000] text-xs font-semibold px-2"
+                          *ngIf="form.controls['c_doc_number'].errors?.['pattern']"
+                        >
+                          Solo se permiten números
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <!-- Campo de doc_number -->
-                <div class="items-center grid grid-cols-4 gap-4">
-                  <label 
-                    hlmLabel 
-                    for="documentNumber" 
-                    class="text-right"
-                  >
-                    Document Number
-                  </label>
-                  <input 
-                    hlmInput 
-                    id="documentNumber" 
-                    class="col-span-3 px-2 rounded-sm"
-                    formControlName="doc_number"
-                    type="text"
-                    placeholder="124521124521"
-                    required
-                    [class.noValido]="form.controls['doc_number'].invalid && (form.controls['doc_number'].touched || form.controls['doc_number'].dirty)"
-                    [class.valido]="form.controls['doc_number'].valid && (form.controls['doc_number'].touched || form.controls['doc_number'].dirty)"
-                  />
-                  <div
-                    class="col-span-4"
-                    *ngIf="form.controls['doc_number'].invalid && (form.controls['doc_number'].touched || form.controls['doc_number'].dirty)"
-                  >
-                    <p
-                      class="text-[#760000] text-xs font-semibold px-2"
-                      *ngIf="form.controls['doc_number'].errors?.['required']"
+                <div>
+                  <h3 class="text-lg font-semibold">
+                    Payment Information
+                  </h3>
+                  <!-- Campo de doc_type -->
+                  <div class="items-center grid grid-cols-4 gap-4 text-sm">
+                    <label 
+                      hlmLabel 
+                      for="c_documentType" 
+                      class="text-right"
                     >
-                      Este campo es obligatorio
-                    </p>
-                    <p
-                      class="text-[#760000] text-xs font-semibold px-2"
-                      *ngIf="form.controls['doc_number'].errors?.['minlength'] || form.controls['doc_type'].value === 'Boleta'"
+                      Document Type
+                    </label>
+                    <select 
+                      hlmSelect 
+                      id="c_documentType" 
+                      class="col-span-3 px-1 rounded-sm"
+                      formControlName="doc_type"
+                      required
+                      [class.noValido]="form.controls['doc_type'].invalid && (form.controls['doc_type'].touched || form.controls['doc_type'].dirty)"
+                      [class.valido]="form.controls['doc_type'].valid && (form.controls['doc_type'].touched || form.controls['doc_type'].dirty)"
                     >
-                      If you choose Boleta, the field must have 12 characters
-                    </p>
-                    <p
-                      class="text-[#760000] text-xs font-semibold px-2"
-                      *ngIf="form.controls['doc_number'].errors?.['maxlength'] || form.controls['doc_type'].value === 'Factura'"
+                      <option value="" disabled selected>Select a document</option>
+                      <option value="Factura">Factura</option>
+                      <option value="Boleta">Boleta</option>
+                    </select>
+                  </div>
+                  <!-- Campo de doc_number -->
+                  <div class="items-center grid grid-cols-4 gap-4 text-sm">
+                    <label 
+                      hlmLabel 
+                      for="documentNumber" 
+                      class="text-right"
                     >
-                      If you choose Factura, the field must have 20 characters
-                    </p>
-                    <p
-                      class="text-[#760000] text-xs font-semibold px-2"
-                      *ngIf="form.controls['doc_number'].errors?.['pattern']"
+                      Document Number
+                    </label>
+                    <input 
+                      hlmInput 
+                      id="documentNumber" 
+                      class="col-span-3 px-2 rounded-sm"
+                      formControlName="doc_number"
+                      type="text"
+                      placeholder="124521124521"
+                      required
+                      [class.noValido]="form.controls['doc_number'].invalid && (form.controls['doc_number'].touched || form.controls['doc_number'].dirty)"
+                      [class.valido]="form.controls['doc_number'].valid && (form.controls['doc_number'].touched || form.controls['doc_number'].dirty)"
+                    />
+                    <div
+                      class="col-span-4"
+                      *ngIf="form.controls['doc_number'].invalid && (form.controls['doc_number'].touched || form.controls['doc_number'].dirty)"
                     >
-                      Solo se permiten números
-                    </p>
+                      <p
+                        class="text-[#760000] text-xs font-semibold px-2"
+                        *ngIf="form.controls['doc_number'].errors?.['required']"
+                      >
+                        Este campo es obligatorio
+                      </p>
+                      <p
+                        class="text-[#760000] text-xs font-semibold px-2"
+                        *ngIf="form.controls['doc_number'].errors?.['minlength'] || form.controls['doc_type'].value === 'Boleta'"
+                      >
+                        If you choose Boleta, the field must have 12 characters
+                      </p>
+                      <p
+                        class="text-[#760000] text-xs font-semibold px-2"
+                        *ngIf="form.controls['doc_number'].errors?.['maxlength'] || form.controls['doc_type'].value === 'Factura'"
+                      >
+                        If you choose Factura, the field must have 20 characters
+                      </p>
+                      <p
+                        class="text-[#760000] text-xs font-semibold px-2"
+                        *ngIf="form.controls['doc_number'].errors?.['pattern']"
+                      >
+                        Solo se permiten números
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <hlm-dialog-footer>
+                  <hlm-toaster />
                   <button
                     class="px-4 py-1 rounded-md shadow-lg bg-green-600 hover:bg-green-800 text-white transition-colors duration-200 ease-in-out"
                     type="submit"
-                    [disabled]="this.form.invalid"
-                    [class.disabled]="this.form.invalid"
+                    (click)="showToast()"
                   >
                     Save changes
                   </button>
