@@ -180,32 +180,20 @@ export class DashboardComponent implements OnInit{
 
   // Update book
   updateBook() {
-    this._BookServices.updateBook(this.preorder[0].Book.stock-this.preorder[0].quantity,this.preorder[0].Book.book_id).subscribe(
-      (data: string) => {
-        if (data) {
-          this.response = data;
-        } else {
-          console.log("Book not updated");
+    this.preorder.forEach(pre => {
+      this._BookServices.updateBook(pre.Book.stock - pre.quantity, pre.Book.book_id).subscribe(
+        (data: any) => {
+          if (data) {
+            this.response = data;
+          } else {
+            console.log("Book not updated");
+          }
+        },
+        (error) => {
+          console.log(error);
         }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    // this.preorder.forEach(pre => {
-    //   this._BookServices.updateBook(pre.Book.stock - pre.quantity, pre.Book.book_id).subscribe(
-    //     (data: string) => {
-    //       if (data) {
-    //         this.response = data;
-    //       } else {
-    //         console.log("Book not updated");
-    //       }
-    //     },
-    //     (error) => {
-    //       console.log(error);
-    //     }
-    //   );
-    // });
+      );
+    });
   }
 
   // Get client by doc_number
