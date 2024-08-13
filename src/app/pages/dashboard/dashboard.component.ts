@@ -18,9 +18,9 @@ import {
   HlmSheetFooterComponent,
   HlmSheetHeaderComponent,
   HlmSheetTitleDirective,
-} from '@spartan-ng/ui-sheet-helm';
+} from '../../../../ui-sheet-helm/src';
 // UI Avatar
-import { HlmAvatarImageDirective, HlmAvatarComponent, HlmAvatarFallbackDirective } from '@spartan-ng/ui-avatar-helm';
+import { HlmAvatarImageDirective, HlmAvatarComponent, HlmAvatarFallbackDirective } from '../../../../components/ui-avatar-helm/src';
 import { PreorderItemComponent } from '../../UI/Preorder/preorder-item/preorder-item.component';
 // UI Dialog
 import { BrnDialogContentDirective, BrnDialogTriggerDirective } from '@spartan-ng/ui-dialog-brain';
@@ -31,9 +31,9 @@ import {
   HlmDialogFooterComponent,
   HlmDialogHeaderComponent,
   HlmDialogTitleDirective,
-} from '@spartan-ng/ui-dialog-helm';
+} from '../../../../components/ui-dialog-helm/src';
 import { toast } from 'ngx-sonner';
-import { HlmToasterComponent } from '@spartan-ng/ui-sonner-helm';
+import { HlmToasterComponent } from '../../../../ui-sonner-helm/src';
 
 // Services
 import { BookServices } from '../../services/book/book-services.service';
@@ -107,6 +107,8 @@ export class DashboardComponent implements OnInit{
   total: number = 0;
   desplegar: boolean = false;
   opcionFilter: string = 'ISBN';
+
+  //New deploy
 
   // Variables for client
   choose: boolean = false;
