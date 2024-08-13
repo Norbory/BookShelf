@@ -23,40 +23,40 @@
     ],
     "paths": {
       "@spartan-ng/ui-alert-helm": [
-        ".\\components/ui-alert-helm/src/index.ts"
+        "./components/ui-alert-helm/src/index.ts"
       ],
       "@spartan-ng/ui-avatar-helm": [
-        ".\\components/ui-avatar-helm/src/index.ts"
+        "./components/ui-avatar-helm/src/index.ts"
       ],
       "@spartan-ng/ui-dialog-helm": [
-        ".\\components/ui-dialog-helm/src/index.ts"
+        "./components/ui-dialog-helm/src/index.ts"
       ],
       "@spartan-ng/ui-popover-helm": [
-        ".\\components/ui-popover-helm/src/index.ts"
+        "./components/ui-popover-helm/src/index.ts"
       ],
       "@spartan-ng/ui-hovercard-helm": [
-        ".\\components/ui-hovercard-helm/src/index.ts"
+        "./components/ui-hovercard-helm/src/index.ts"
       ],
       "@spartan-ng/ui-tooltip-helm": [
-        ".\\components/ui-tooltip-helm/src/index.ts"
+        "./components/ui-tooltip-helm/src/index.ts"
       ],
       "@spartan-ng/ui-pagination-helm": [
-        ".\\components/ui-pagination-helm/src/index.ts"
+        "./components/ui-pagination-helm/src/index.ts"
       ],
       "@spartan-ng/ui-carousel-helm": [
-        ".\\components/ui-carousel-helm/src/index.ts"
+        "./components/ui-carousel-helm/src/index.ts"
       ],
       "@spartan-ng/ui-icon-helm": [
-        ".\\components/ui-icon-helm/src/index.ts"
+        "./components/ui-icon-helm/src/index.ts"
       ],
       "@spartan-ng/ui-button-helm": [
-        ".\\components/ui-button-helm/src/index.ts"
+        "./components/ui-button-helm/src/index.ts"
       ],
       "@spartan-ng/ui-sheet-helm": [
-        ".\\ui-sheet-helm/src/index.ts"
+        "./ui-sheet-helm/src/index.ts"
       ],
       "@spartan-ng/ui-sonner-helm": [
-        ".\\ui-sonner-helm/src/index.ts"
+        "./ui-sonner-helm/src/index.ts"
       ]
     }
   },

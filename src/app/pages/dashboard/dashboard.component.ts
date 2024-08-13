@@ -18,9 +18,9 @@ import {
   HlmSheetFooterComponent,
   HlmSheetHeaderComponent,
   HlmSheetTitleDirective,
-} from '../../../../ui-sheet-helm/src';
+} from '@spartan-ng/ui-sheet-helm';
 // UI Avatar
-import { HlmAvatarImageDirective, HlmAvatarComponent, HlmAvatarFallbackDirective } from '../../../../components/ui-avatar-helm/src';
+import { HlmAvatarImageDirective, HlmAvatarComponent, HlmAvatarFallbackDirective } from '@spartan-ng/ui-avatar-helm';
 import { PreorderItemComponent } from '../../UI/Preorder/preorder-item/preorder-item.component';
 // UI Dialog
 import { BrnDialogContentDirective, BrnDialogTriggerDirective } from '@spartan-ng/ui-dialog-brain';
@@ -31,9 +31,9 @@ import {
   HlmDialogFooterComponent,
   HlmDialogHeaderComponent,
   HlmDialogTitleDirective,
-} from '../../../../components/ui-dialog-helm/src';
+} from '@spartan-ng/ui-dialog-helm';
 import { toast } from 'ngx-sonner';
-import { HlmToasterComponent } from '../../../../ui-sonner-helm/src';
+import { HlmToasterComponent } from '@spartan-ng/ui-sonner-helm';
 
 // Services
 import { BookServices } from '../../services/book/book-services.service';
