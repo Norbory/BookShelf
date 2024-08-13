@@ -171,6 +171,7 @@ export class DashboardComponent implements OnInit{
         (data: any) => {
           if (data) {
             console.log("Order detail created");
+            console.log("Aqui");
           }
         },
         (error) => {
